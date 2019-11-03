@@ -1,0 +1,29 @@
+{
+  "name": "picly-express",
+  "version": "1.0.0",
+  "description": "Picly integracion in Express server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Rafael Gómez Blanes",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "extract-values": "^0.1.2",
+    "fs-extra": "^8.1.0",
+    "gimport": "^1.0.3",
+    "gm": "^1.23.1",
+    "image-size": "^0.8.3",
+    "is-json": "^2.0.1",
+    "node-cron": "^2.0.3",
+    "shortid": "^2.2.15",
+    "underscore": "^1.9.1",
+    "url": "^0.11.0",
+    "uuid": "^3.3.3",
+    "valid-url": "^1.0.9"
+  },
+  "devDependencies": {
+    "express": "^4.17.1"
+  }
+}

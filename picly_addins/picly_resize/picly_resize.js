@@ -1,0 +1,82 @@
+"use strict";
+
+var gm = require("gm");
+var sizeOf = require('image-size');
+const DEFAULTWIDTH = 120;
+
+module.exports = {};
+
+module.exports.picly = {};
+
+module.exports.picly.info = function() {
+    return {
+        name: "resize",
+        description: "Picly module for resizing image",
+        params: [
+            { name: "w", description: "Width in pixels", type: "integer", optional: true },
+            { name: "h", description: "Height in pixels", type: "integer", optional: true }
+        ],
+        sampleO: "examples/resize_original.jpg",
+        sampleM: "examples/resize_mod.png",
+        example: "w(340)"
+    }
+}
+
+var imageSize = function(fullPathToImage) {
+    return new Promise((resolve, reject) => {
+        sizeOf(fullPathToImage, (err, dimensions) => {
+            if (!!err) reject(err);
+            else resolve(dimensions);
+        });
+    });
+}
+
+module.exports.picly.perform = function(params) {
+    return new Promise((resolve, reject) => {
+        imageSize(params.sourceEntity)
+            .then((originalImageSize) => {
+                let finalWidth = 0;
+                let finalHeight = 0;
+                let destWidth = params.w;
+                let destHeight = params.h;
+                let resizeOption = "";
+
+                // Case 1) - destination width set, but no height
+                if (destWidth && !destHeight) {
+                    finalWidth = destWidth;
+                    let ratio = originalImageSize.width / destWidth;
+                    finalHeight = originalImageSize.height / ratio;
+                }
+
+                // Case 2) - destination height set, but no width
+                if (!destWidth && destHeight) {
+                    finalHeight = destHeight;
+                    let ratio = originalImageSize.height / destHeight;
+                    finalWidth = originalImageSize.width / ratio;
+                }
+
+                // Case 3) - no destination width or height set, then set with to DEFAULTWIDTH
+                if (!destWidth && !destHeight) {
+                    finalWidth = destWidth;
+                    let ratio = originalImageSize.width / destWidth;
+                    finalHeight = originalImageSize.height / ratio;
+                }
+
+                // Case 4) - destination width and height set
+                if (destWidth && destHeight) {
+                    finalWidth = destWidth;
+                    finalHeight = destHeight;
+                    resizeOption = "!";
+                }
+
+                gm(params.sourceEntity)
+                    .resize(finalWidth, finalHeight, resizeOption)
+                    .write(params.destEntity, function(err) {
+                        if (!!err) { reject(err); } else {
+                            resolve();
+                        }
+                    });
+            })
+            .catch((err) => { reject(err); })
+    })
+}
