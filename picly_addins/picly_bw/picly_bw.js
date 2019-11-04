@@ -21,9 +21,9 @@ module.exports.picly.perform = function(params) {
     return new Promise((res, rej) => {
         Sharp(params.sourceEntity)
             .grayscale()
-            .toFile( params.destEntity, (err) => {
-                if (err) rej(err);
-                else res();
+            .toFile(params.destEntity, (err) => {
+                if (!!err) rej(err);
+                res();
             });
     })
 }

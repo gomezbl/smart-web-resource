@@ -8,10 +8,9 @@ const RequestBootstrap = require("./lib/requestbootstrap");
 const ParseUrl = require("./lib/urlactionsparser");
 const ActionsChecker = require("./lib/actionschecker");
 const ActionsParser = require("./lib/actionsparser.js");
-const FilesManager = require("./files/index.js");
+const FilesManager = require("files-repo");
 const Utils = require("./lib/utils");
 const PathHash = require("./lib/pathhash.js");
-const TmpFilesRemover = require("./lib/tmpfilesremover.js");
 
 let _config;
 let _cachedFilesManager;
@@ -149,8 +148,11 @@ module.exports = function( config ) {
         _config = config;
         _config.prefix = `/${config.prefix ? config.prefix : DEFAULT_PREFIX}/`;
         _config.sufix = config.sufix ? config.sufix : DEFAULT_SUFIX;
-        _cachedFilesManager = FilesManager( { Path: pathToCachedFilesRepository, Size: DEFAULT_FILESREPOSITORY_SIZE });
-        _tmpFilesManager = FilesManager( { Path: pathToTmpFilesRepository, Size: DEFAULT_FILESREPOSITORY_SIZE });
+        _cachedFilesManager = FilesManager( { Path: pathToCachedFilesRepository, 
+                                              Size: DEFAULT_FILESREPOSITORY_SIZE });
+        _tmpFilesManager = FilesManager( { Path: pathToTmpFilesRepository, 
+                                           Size: DEFAULT_FILESREPOSITORY_SIZE,
+                                           /*RemoveOlderFiles: 60*/ });
     
         // Init addins manager asynchronously and files repository folders
         (async function() {
@@ -169,9 +171,6 @@ module.exports = function( config ) {
     
             checkAliases(config.aliases);
         })();
-
-        // Init cron 
-        TmpFilesRemover( _tmpFilesManager );
     
         return Express_middleware;
     }
