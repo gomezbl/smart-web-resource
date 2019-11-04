@@ -1,7 +1,6 @@
 "use strict";
 
 const Path = require("path");
-const fs = require("fs");
 
 const ActionsManager = require("./lib/actionsmanager");
 const RequestBootstrap = require("./lib/requestbootstrap");
@@ -16,7 +15,7 @@ let _config;
 let _cachedFilesManager;
 let _tmpFilesManager;
 
-let DEFAULT_PREFIX = "picly";
+let DEFAULT_PREFIX = "swr";
 let DEFAULT_SUFIX = "resource";
 let DEFAULT_FILESREPOSITORY_CACHED = "cached";
 let DEFAULT_FILESREPOSITORY_TMP = "tmp";
@@ -113,9 +112,9 @@ async function Express_middleware( req, res, next ) {
     }
 }
 
-function checkPathConfig( msg, param ) {
-    if ( !param ) throw Error(`${msg} parameter undefined in middleware configuration` );    
-    if ( !fs.existsSync(param) ) throw Error(`${msg} doesn't exist` );
+function checkPathConfig( msg, path ) {
+    if ( !path ) throw Error(`${msg} parameter undefined in middleware configuration` );    
+    if ( !Utils.existsFolderSync(path) ) throw Error(`${msg} at ${path} doesn't exist` );
 }
 
 function checkMiddlewareConfig(config) {

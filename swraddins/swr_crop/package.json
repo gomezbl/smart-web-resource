@@ -1,8 +1,8 @@
 {
-  "name": "picly_bw",
+  "name": "picly_crop",
   "version": "1.0.0",
-  "description": "## Action name: _bw_",
-  "main": "picly_bw.js",
+  "description": "This Picly core plugin crop you to add charcoal effect to your images.",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

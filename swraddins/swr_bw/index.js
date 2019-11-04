@@ -4,12 +4,12 @@ const Sharp = require("sharp");
 
 module.exports = {};
 
-module.exports.picly = {};
+module.exports.swr = {};
 
-module.exports.picly.info = function() {
+module.exports.swr.info = function() {
     return {
         name: "bw",
-        description: "Picly module for convert to black & white your image",
+        description: "Smart Web Resource module for convert to black & white your image",
         params: [],
         sampleO: "examples/bw_original.jpg",
         sampleM: "examples/bw_mod.jpg",
@@ -17,7 +17,7 @@ module.exports.picly.info = function() {
     }
 }
 
-module.exports.picly.perform = function(params) {
+module.exports.swr.perform = function(params) {
     return new Promise((res, rej) => {
         Sharp(params.sourceEntity)
             .grayscale()

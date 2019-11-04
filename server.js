@@ -3,12 +3,12 @@ var Express = require("express");
 var App = Express();
 const Path = require("path");
 
-const PiclyExpress = require("./index.js");
+const SWR = require("./index.js");
 
-const piclyExpressConfig = {
+const smartWebResourceConfig = {
     pathToResources : Path.join( __dirname, "test", "samplepictures"),
     pathToFilesRepository : Path.join( __dirname, "test", "filesrepository" ),
-    pathToAddins : Path.join( __dirname, "picly_addins"),
+    pathToAddins : Path.join( __dirname, "swraddins"),
     cache: false,
     verbose: true,
     prefix: "-",
@@ -18,12 +18,12 @@ const piclyExpressConfig = {
         mediumSize: "resize:w(280)",
         largeSize: "resize:w(520)"
     },
-    plugins: [require("./picly_addins/picly_bw/picly_bw.js"),
-              require("./picly_addins/picly_crop/picly_crop.js"),
-              require("./picly_addins/picly_resize/picly_resize.js") ]
+    plugins: [require("./swraddins/swr_bw/"),
+              require("./swraddins/swr_crop/"),
+              require("./swraddins/swr_resize/") ]
 }
 
-App.use( PiclyExpress(piclyExpressConfig) );
+App.use( SWR(smartWebResourceConfig) );
 
 App.get ( "/", function(req,res) {
     res.send("Picly express!!!");

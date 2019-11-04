@@ -5,12 +5,12 @@ const Sharp = require("sharp");
 
 module.exports = {};
 
-module.exports.picly = {};
+module.exports.swr = {};
 
-module.exports.picly.info = function() {
+module.exports.swr.info = function() {
     return {
         name: "resize",
-        description: "Picly module for resizing image",
+        description: "Smart Web Resource module for resizing image",
         params: [
             { name: "w", description: "Width in pixels", type: "integer", optional: true },
             { name: "h", description: "Height in pixels", type: "integer", optional: true }
@@ -30,7 +30,7 @@ var imageSize = function(fullPathToImage) {
     });
 }
 
-module.exports.picly.perform = function(params) {
+module.exports.swr.perform = function(params) {
     return new Promise((resolve, reject) => {
         imageSize(params.sourceEntity)
             .then((originalImageSize) => {

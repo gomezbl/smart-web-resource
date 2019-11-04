@@ -4,12 +4,12 @@ const Sharp = require("sharp");
 
 module.exports = {};
 
-module.exports.picly = {};
+module.exports.swr = {};
 
-module.exports.picly.info = function() {
+module.exports.swr.info = function() {
     return {
         name: "crop",
-        description: "Picly module for croping an image",
+        description: "Smart Web Resource module for croping an image",
         params: [
             { name: "w", description: "Width in pixels", type: "integer", optional: false },
             { name: "h", description: "Height in pixels", type: "integer", optional: false },
@@ -22,7 +22,7 @@ module.exports.picly.info = function() {
     }
 }
 
-module.exports.picly.perform = function(params) {
+module.exports.swr.perform = function(params) {
     return new Promise((res, rej) => {
         Sharp(params.sourceEntity)
             .extract({ left: parseInt(params.x), 
