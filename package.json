@@ -1,15 +1,18 @@
 {
   "name": "picly-express",
   "version": "1.0.0",
-  "description": "Picly integracion in Express server",
+  "description": "Smart web resource - Express middleware",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Rafael Gómez Blanes",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gomezbl/smart-web-resource.git"
+  },
   "dependencies": {
-    "chai": "^4.2.0",
     "extract-values": "^0.1.2",
     "files-repo": "^1.3.0",
     "fs-extra": "^8.1.0",
@@ -24,6 +27,7 @@
     "valid-url": "^1.0.9"
   },
   "devDependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "chai": "^4.2.0"
   }
 }
