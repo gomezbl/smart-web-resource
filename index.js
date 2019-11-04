@@ -152,7 +152,7 @@ module.exports = function( config ) {
                                               Size: DEFAULT_FILESREPOSITORY_SIZE });
         _tmpFilesManager = FilesManager( { Path: pathToTmpFilesRepository, 
                                            Size: DEFAULT_FILESREPOSITORY_SIZE,
-                                           /*RemoveOlderFiles: 60*/ });
+                                           RemoveOlderFiles: 60 });
     
         // Init addins manager asynchronously and files repository folders
         (async function() {
