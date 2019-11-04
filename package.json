@@ -13,7 +13,6 @@
     "extract-values": "^0.1.2",
     "fs-extra": "^8.1.0",
     "gimport": "^1.0.3",
-    "gm": "^1.23.1",
     "image-size": "^0.8.3",
     "is-json": "^2.0.1",
     "node-cron": "^2.0.3",

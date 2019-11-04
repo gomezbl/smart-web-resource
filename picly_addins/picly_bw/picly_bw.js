@@ -1,6 +1,6 @@
 "use strict";
 
-var gm = require("gm");
+const Sharp = require("sharp");
 
 module.exports = {};
 
@@ -19,12 +19,11 @@ module.exports.picly.info = function() {
 
 module.exports.picly.perform = function(params) {
     return new Promise((res, rej) => {
-        gm(params.sourceEntity)
-            .colorspace('GRAY')
-            .write(params.destEntity, function(err) {
-                if (err) { rej(err); } else {
-                    res();
-                }
+        Sharp(params.sourceEntity)
+            .grayscale()
+            .toFile( params.destEntity, (err) => {
+                if (err) rej(err);
+                else res();
             });
     })
 }

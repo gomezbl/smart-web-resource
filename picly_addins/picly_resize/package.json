@@ -1,0 +1,14 @@
+{
+  "name": "picly_resize",
+  "version": "1.0.0",
+  "description": "## Action name: _resize_ This Picly core addin resizes an image to a different width or height. If one of the parameters are missin, resize addin maintains aspect ratio of the  image. If width and height parameters are set, then the addin force image to those dimensions. If no parameters are set, then the image will be set to 120 pixels width. In any case, minimun value between width set in the parameter and the image width will be considered, the same for height parameter.",
+  "main": "picly_resize.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "sharp": "^0.23.2"
+  }
+}

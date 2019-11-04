@@ -1,8 +1,7 @@
 "use strict";
 
-var gm = require("gm");
 var sizeOf = require('image-size');
-const DEFAULTWIDTH = 120;
+const Sharp = require("sharp");
 
 module.exports = {};
 
@@ -69,9 +68,9 @@ module.exports.picly.perform = function(params) {
                     resizeOption = "!";
                 }
 
-                gm(params.sourceEntity)
-                    .resize(finalWidth, finalHeight, resizeOption)
-                    .write(params.destEntity, function(err) {
+                Sharp(params.sourceEntity)
+                    .resize(parseInt(finalWidth), parseInt(finalHeight))
+                    .toFile(params.destEntity, (err) => { 
                         if (!!err) { reject(err); } else {
                             resolve();
                         }
