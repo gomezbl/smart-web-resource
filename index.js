@@ -119,7 +119,6 @@ function checkPathConfig( msg, path ) {
 
 function checkMiddlewareConfig(config) {
     checkPathConfig( "Path to resources", config.pathToResources);    
-    checkPathConfig( "Path to addins repository", config.pathToAddins);
     checkPathConfig( "Path to files repository", config.pathToFilesRepository);
 }
 

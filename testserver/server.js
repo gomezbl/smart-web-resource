@@ -8,7 +8,6 @@ const SWR = require("../index.js");
 const smartWebResourceConfig = {
     pathToResources : Path.join( process.cwd(), "test", "samplepictures"),
     pathToFilesRepository : Path.join( process.cwd(), "test", "filesrepository" ),
-    pathToAddins : Path.join( process.cwd(), "swraddins"),
     cache: false,
     verbose: true,
     prefix: "-",

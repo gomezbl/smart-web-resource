@@ -1,6 +1,6 @@
 {
   "name": "smart-web-resource",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Smart web resource - Express middleware",
   "main": "index.js",
   "scripts": {
