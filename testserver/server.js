@@ -3,12 +3,12 @@ var Express = require("express");
 var App = Express();
 const Path = require("path");
 
-const SWR = require("./index.js");
+const SWR = require("../index.js");
 
 const smartWebResourceConfig = {
-    pathToResources : Path.join( __dirname, "test", "samplepictures"),
-    pathToFilesRepository : Path.join( __dirname, "test", "filesrepository" ),
-    pathToAddins : Path.join( __dirname, "swraddins"),
+    pathToResources : Path.join( process.cwd(), "test", "samplepictures"),
+    pathToFilesRepository : Path.join( process.cwd(), "test", "filesrepository" ),
+    pathToAddins : Path.join( process.cwd(), "swraddins"),
     cache: false,
     verbose: true,
     prefix: "-",
@@ -18,9 +18,9 @@ const smartWebResourceConfig = {
         mediumSize: "resize:w(280)",
         largeSize: "resize:w(520)"
     },
-    plugins: [require("./swraddins/swr_bw/"),
-              require("./swraddins/swr_crop/"),
-              require("./swraddins/swr_resize/") ]
+    plugins: [require("../swraddins/swr_bw"),
+              require("../swraddins/swr_crop"),
+              require("../swraddins/swr_resize") ]
 }
 
 App.use( SWR(smartWebResourceConfig) );
