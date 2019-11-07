@@ -17,6 +17,7 @@ let _tmpFilesManager;
 
 let DEFAULT_PREFIX = "swr";
 let DEFAULT_SUFIX = "resource";
+let DEFAULT_ROOT_FOLDER_FOR_FILES = "tmpfiles";
 let DEFAULT_FILESREPOSITORY_CACHED = "cached";
 let DEFAULT_FILESREPOSITORY_TMP = "tmp";
 let DEFAULT_FILESREPOSITORY_SIZE = 2;
@@ -138,14 +139,19 @@ function checkAliases(aliases) {
 module.exports = function( config ) {
     try
     {
-        checkMiddlewareConfig(config);
-    
-        let pathToCachedFilesRepository = Path.join(config.pathToFilesRepository, DEFAULT_FILESREPOSITORY_CACHED );
-        let pathToTmpFilesRepository = Path.join(config.pathToFilesRepository, DEFAULT_FILESREPOSITORY_TMP );
+        let cnf = Object.assign( {}, config );
+        let pathToCachedFilesRepository;
+        let pathToTmpFilesRepository;
 
-        _config = config;
-        _config.prefix = `/${config.prefix ? config.prefix : DEFAULT_PREFIX}/`;
-        _config.sufix = config.sufix ? config.sufix : DEFAULT_SUFIX;
+        cnf.pathToFilesRepository = cnf.pathToFilesRepository ? cnf.pathToFilesRepository : Path.join( __dirname, DEFAULT_ROOT_FOLDER_FOR_FILES );
+        pathToCachedFilesRepository = Path.join(cnf.pathToFilesRepository, DEFAULT_FILESREPOSITORY_CACHED );
+        pathToTmpFilesRepository = Path.join(cnf.pathToFilesRepository, DEFAULT_FILESREPOSITORY_TMP );
+
+        checkMiddlewareConfig(cnf);
+    
+        _config = cnf;
+        _config.prefix = `/${cnf.prefix ? cnf.prefix : DEFAULT_PREFIX}/`;
+        _config.sufix = cnf.sufix ? cnf.sufix : DEFAULT_SUFIX;
         _cachedFilesManager = FilesManager( { Path: pathToCachedFilesRepository, 
                                               Size: DEFAULT_FILESREPOSITORY_SIZE });
         _tmpFilesManager = FilesManager( { Path: pathToTmpFilesRepository, 
@@ -157,7 +163,7 @@ module.exports = function( config ) {
             await Utils.ensureDir(pathToCachedFilesRepository);
             await Utils.ensureDir(pathToTmpFilesRepository);
     
-            let addinsDetected = await ActionsManager.init( _config.verbose, config.plugins );
+            let addinsDetected = await ActionsManager.init( _config.verbose, cnf.plugins );
     
             if ( verbose() ) {
                 if ( addinsDetected ) {

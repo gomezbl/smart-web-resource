@@ -1,3 +1,6 @@
 node_modules/**
 test/filesrepository/*
 test/tmp/*
+tmpfiles/**
+tmpfiles/tmp/**
+tmpfiles/cached/**
