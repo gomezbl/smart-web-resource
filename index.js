@@ -144,6 +144,8 @@ module.exports = function( config ) {
         let pathToTmpFilesRepository;
 
         cnf.pathToFilesRepository = cnf.pathToFilesRepository ? cnf.pathToFilesRepository : Path.join( __dirname, DEFAULT_ROOT_FOLDER_FOR_FILES );
+        Utils.ensureDirSync( cnf.pathToFilesRepository );
+
         pathToCachedFilesRepository = Path.join(cnf.pathToFilesRepository, DEFAULT_FILESREPOSITORY_CACHED );
         pathToTmpFilesRepository = Path.join(cnf.pathToFilesRepository, DEFAULT_FILESREPOSITORY_TMP );
 
