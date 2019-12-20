@@ -22,9 +22,23 @@ let DEFAULT_FILESREPOSITORY_CACHED = "cached";
 let DEFAULT_FILESREPOSITORY_TMP = "tmp";
 let DEFAULT_FILESREPOSITORY_SIZE = 2;
 
-function ParseRequest( pathToResource ) {
+/* 
+ * Returns full path to resource.
+ * If resourceHandler in config is defined, then that function should translate
+ * the resource requested to its final and real location.
+ */
+async function GetFullPathToResource( resource, resourceHandler ) {
+    if ( resourceHandler ) {
+        return resourceHandler(resource);
+    } else {
+        return Path.join( _config.pathToResources, resource );
+    }
+}
+
+async function ParseRequest( pathToResource ) {
     let urlParsed = ParseUrl.parseUrl(pathToResource, _config.sufix);
-    urlParsed.entity = Path.join( _config.pathToResources, urlParsed.entity );
+
+    urlParsed.entity = await GetFullPathToResource( urlParsed.entity, _config.resourceHandler );
 
     // Check aliases, if present, translate for their actions
     if ( _config.aliases ) {
@@ -90,7 +104,7 @@ async function PerformRequestNoCache( res, urlParsed ) {
 async function Express_middleware( req, res, next ) {
     try {
         if ( req.path.startsWith( _config.prefix ) ) {
-            let urlParsed = ParseRequest( req.path );
+            let urlParsed = await ParseRequest( req.path );
     
             if ( cacheResource() ) {            
                 let pathHash = PathHash.GetHashFromPath( req.path );
@@ -119,7 +133,10 @@ function checkPathConfig( msg, path ) {
 }
 
 function checkMiddlewareConfig(config) {
-    checkPathConfig( "Path to resources", config.pathToResources);    
+    if ( !config.resourceHandler ) {
+        checkPathConfig( "Path to resources", config.pathToResources);    
+    }
+    
     checkPathConfig( "Path to files repository", config.pathToFilesRepository);
 }
 
