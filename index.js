@@ -165,6 +165,10 @@ module.exports = function( config ) {
             await Utils.ensureDir(pathToCachedFilesRepository);
             await Utils.ensureDir(pathToTmpFilesRepository);
     
+            if (config.removeCacheAtStartup && config.removeCacheAtStartup == true) {
+                await _cachedFilesManager.EmptyRepository();
+            }
+
             let addinsDetected = await ActionsManager.init( _config.verbose, cnf.plugins );
     
             if ( verbose() ) {

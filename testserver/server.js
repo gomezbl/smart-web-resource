@@ -8,7 +8,7 @@ const SWR = require("../index.js");
 const smartWebResourceConfig = {
     pathToResources : Path.join( process.cwd(), "test", "samplepictures"),
     //pathToFilesRepository : Path.join( process.cwd(), "test", "filesrepository" ),
-    cache: false,
+    cache: true,
     verbose: true,
     prefix: "-",
     sufix: "-",
@@ -17,7 +17,8 @@ const smartWebResourceConfig = {
         mediumSize: "resize:w(280)",
         largeSize: "resize:w(520)"
     },
-    plugins: [require("swr_resize")]
+    plugins: [require("swr_resize")],
+    removeCacheAtStartup: true
 }
 
 App.use( SWR(smartWebResourceConfig) );
