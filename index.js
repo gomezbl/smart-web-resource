@@ -173,9 +173,15 @@ module.exports = function( config ) {
         _config.sufix = cnf.sufix ? cnf.sufix : DEFAULT_SUFIX;
         _cachedFilesManager = FilesManager( { Path: pathToCachedFilesRepository, 
                                               Size: DEFAULT_FILESREPOSITORY_SIZE });
-        _tmpFilesManager = FilesManager( { Path: pathToTmpFilesRepository, 
-                                           Size: DEFAULT_FILESREPOSITORY_SIZE,
-                                           RemoveOlderFiles: 60 });
+
+        if ( cnf.removeOlderFile && cnf.removeOlderFiles == true ) {
+            _tmpFilesManager = FilesManager( { Path: pathToTmpFilesRepository, 
+                                               Size: DEFAULT_FILESREPOSITORY_SIZE,
+                                               RemoveOlderFiles: 60 });
+        } else {
+            _tmpFilesManager = FilesManager( { Path: pathToTmpFilesRepository, 
+                Size: DEFAULT_FILESREPOSITORY_SIZE });
+        }
     
         // Init addins manager asynchronously and files repository folders
         (async function() {
