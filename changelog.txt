@@ -1,0 +1,2 @@
+1.0.8
+-> Update swr_resize to 1.0.1 (which uses jimp instead of sharp)

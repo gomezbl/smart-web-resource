@@ -1,6 +1,6 @@
 {
   "name": "smart-web-resource",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Smart web resource - Express middleware",
   "main": "index.js",
   "scripts": {
@@ -21,7 +21,7 @@
     "is-json": "^2.0.1",
     "node-cron": "^2.0.3",
     "shortid": "^2.2.15",
-    "swr_resize": "^1.0.0",
+    "swr_resize": "^1.0.1",
     "underscore": "^1.9.1",
     "url": "^0.11.0",
     "uuid": "^3.3.3",
